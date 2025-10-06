@@ -16,7 +16,8 @@ Notes from the Main Class
 The object of this project is to allow a user to enter information about a single Pokémon and will hold a list of Pokémon. It allows users to add Pokémon using the CLI or a .txt document, remove Pokémon, search for a specific Pokémon using a Pokédex Number, display a list of all Pokémon to the CLI, update a Pokémon using the CLI, compare the weight and height of two specified Pokémon, and check to see when a specified Pokémon will evolve.
 
 The list of information the system holds for each Pokémon is:
-      - Pokémon Name
+    
+	- Pokémon Name
 	- Pokédex Number
 	- Pokémon Types (1 or 2)
 	- nextEvolutionLevel
