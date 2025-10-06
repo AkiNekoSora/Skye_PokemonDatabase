@@ -7,7 +7,8 @@ CEN-3024C-13950
 This is the Main Project for Software Development I. I decided to create a Pokémon Database. During this Module, I made the Logic and Input Validation for the main methods of the database. I also created some tests for a few of the classes for fun. This project currently runs on the CLI. Next up, I will add a database to connect to the system and a GUI interface for the database.
 
 The folder also contains 
-      - A .jar file to run the system. 
+      
+	  - A .jar file to run the system. 
       - 2 .txt files to test the "Add Pokemon using a .txt file" method.
 
 
