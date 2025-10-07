@@ -536,7 +536,7 @@ public class PokemonManager {
             System.out.println(userInputHelper.errorMessageColors("Pokédex Number was not found."));
             userTryAgain = userInputHelper.getBooleanInput("Would you like to try again?");
         }
-        return successMessageColors("No Pokémon updated!");
+        return userInputHelper.errorMessageColors("No Pokémon updated!");
     }
 
     /* Method Name: Remove Pokémon By Pokédex Number
@@ -553,24 +553,24 @@ public class PokemonManager {
         // Loops until the user gives a valid Pokédex Number
         while (userTryAgain){
             int userStatedPokedexID = userInputHelper.getInt(
-                    "Enter the Pokédex ID number you would like to remove: ",
+                    "Enter the Pokédex number you would like to remove: ",
                     "Pokémon Pokédex Number cannot be anything other than a number. Please try again.");
 
             for (Pokemon pokemon : pokemonStorage) {
                 if (pokemon.getPokedexNumber() == userStatedPokedexID) {
                     pokemonStorage.remove(pokemon);
-                    System.out.println(successMessageColors("Pokédex ID Number " +
+                    System.out.println(successMessageColors("Pokédex Number " +
                             pokemon.getPokedexNumber() + " has been removed!"));
                     return successMessageColors("Pokémon Successfully Removed!");
                 }
             }
-            System.out.println(text.BRIGHT_RED + "Pokédex ID Number was " +
+            System.out.println(text.BRIGHT_RED + "Pokédex Number was " +
                     "not found." + text.RESET);
 
             userTryAgain = userInputHelper.getBooleanInput("Would you like to try again?");
         }
 
-        return "No Pokémon was removed!";
+        return userInputHelper.errorMessageColors("No Pokémon was removed!");
     }
 
     /* Method Name: Find Pokémon By Pokédex ID Method
@@ -587,22 +587,21 @@ public class PokemonManager {
         // Loops until the user gives a valid Pokédex Number
         while (userTryAgain) {
             int userStatedPokedexNum = userInputHelper.getInt(
-                    "Enter the Pokédex ID you would like to find: ",
+                    "Enter the Pokédex Number you would like to find: ",
                     "Pokémon Pokédex Number cannot be anything other than a number. Please try again.");
 
             for (Pokemon pokemon : pokemonStorage) {
                 if (pokemon.getPokedexNumber() == userStatedPokedexNum) {
-                    System.out.print(successMessageColors("Pokémon Found!"));
-                    return pokemon.toString();
+                    return successMessageColors("FOUND POKÉMON:" + pokemon);
                 }
             }
 
-            System.out.println(userInputHelper.errorMessageColors("Pokédex Number was not found."));
+            System.out.println(userInputHelper.errorMessageColors("No Pokemon found with that Pokédex Number."));
 
             userTryAgain = userInputHelper.getBooleanInput("Would you like to try again?");
         }
 
-        return "No Pokémon was found!";
+        return userInputHelper.errorMessageColors("No Pokémon was found!");
     }
 
     /* Method Name: Compare Pokémon By Pokédex ID
@@ -619,10 +618,10 @@ public class PokemonManager {
         // Loops until the user gives two valid Pokédex Numbers
         while (userTryAgain) {
             int PokedexNumber1 = userInputHelper.getInt(
-                    "Enter the first Pokédex ID you would like to compare: ",
+                    "Enter the first Pokédex Number you would like to compare: ",
                     "Pokémon Pokédex Number cannot be anything other than a number. Please try again.");
             int pokedexNumber2 = userInputHelper.getInt(
-                    "Enter the second Pokédex ID you would like to compare: ",
+                    "Enter the second Pokédex Number you would like to compare: ",
                     "Pokémon Pokédex Number cannot be anything other than a number. Please try again.");
 
             Pokemon pokemon1 = null;
@@ -634,14 +633,13 @@ public class PokemonManager {
             }
 
             if (pokemon1 == null || pokemon2 == null) {
-                System.out.println(text.BRIGHT_RED + "One or both Pokédex numbers were not found.\n" + text.RESET);
+                System.out.println(userInputHelper.errorMessageColors("One or both Pokémon were not found."));
             } else {
                 BigDecimal weightDiff = pokemon1.getPokemonWeightKilograms().subtract(pokemon2.getPokemonWeightKilograms());
                 BigDecimal heightDiff = pokemon1.getPokemonHeightMeters().subtract(pokemon2.getPokemonHeightMeters());
 
                 StringBuilder pokemonComparisonResults = new StringBuilder();
-                pokemonComparisonResults.append(text.MAGENTA + "\nFINAL POKÉMON COMPARISON " +
-                        "RESULTS:\n     ");
+                pokemonComparisonResults.append(text.MAGENTA + "FINAL POKÉMON COMPARISON RESULTS:\n     ");
 
                 // Weight comparison
                 if (weightDiff.signum() < 0) {
@@ -672,7 +670,7 @@ public class PokemonManager {
             userTryAgain = userInputHelper.getBooleanInput("Would you like to try again?");
         }
 
-        return "No comparisons made.";
+        return userInputHelper.errorMessageColors("No comparisons made.");
     }
 
     /* Method Name: Check Pokémon Next Evolution
@@ -689,31 +687,47 @@ public class PokemonManager {
 
         // Loops until the user gives a valid Pokédex Number
         while (userTryAgain) {
-                int userPokedexNumber = userInputHelper.getInt(
-                        "Enter the Pokédex ID you would like to check next Evolution: ",
-                        "Pokémon Pokédex Number cannot be anything other than a number. Please try again.");
+            Pokemon userPokemon = null;
+            int userPokedexNumber = userInputHelper.getInt(
+                    "Enter the Pokédex Number you would like to check next Evolution: ",
+                    "Pokémon Pokédex Number cannot be anything other than a number. Please try again.");
 
-                for (Pokemon pokemon : pokemonStorage) {
-                    if (pokemon.getPokedexNumber() == userPokedexNumber) {
-                        if (pokemon.getNextEvolutionLevel() == null || pokemon.getNextEvolutionLevel() == 0) {
-                            System.out.println("Pokémon has reached the final evolution!");
-                        } else {
-                            int currentEvoLevel = userInputHelper.getInt(
-                                    "Enter the current evolution level: ",
-                                    "Evolution level must be a valid number. Please try again.");
-
-                            int evolutionLevelDiff = pokemon.getNextEvolutionLevel() - currentEvoLevel;
-
-                            return  successMessageColors ("\nFINAL POKÉMON COMPARISON RESULTS:\n" +
-                                    "There are " + evolutionLevelDiff + " evolution levels until " +
-                                    pokemon.getPokemonName() + " evolves.\n" +
-                                    pokemon.getPokemonName() + " evolves at level: " + pokemon.getNextEvolutionLevel());
-                        }
-                    }
+            for (Pokemon pokemon : pokemonStorage) {
+                if (pokemon.getPokedexNumber() == userPokedexNumber) {
+                    userPokemon = pokemon;
+                    break;
                 }
-                userTryAgain = userInputHelper.getBooleanInput("Would you like to try again?");
             }
-        return "No evolution check made.";
+
+            if (userPokemon == null) {
+                System.out.println(userInputHelper.errorMessageColors("No Pokemon found with that Pokédex Number."));
+                userTryAgain = userInputHelper.getBooleanInput("Would you like to try again?");
+                continue;
+            }
+
+            Integer nextEvolutionLevel = userPokemon.getNextEvolutionLevel();
+            if (nextEvolutionLevel == null || nextEvolutionLevel == 0) {
+                return successMessageColors("Pokémon has reached the final evolution!");
+            }
+            int currentEvoLevel = userInputHelper.getInt(
+                    "Enter the current evolution level: ",
+                    "Evolution level must be a valid number. Please try again.");
+
+            if (currentEvoLevel >= nextEvolutionLevel) {
+                System.out.println(userInputHelper.errorMessageColors("Current level exceeds or equals the next evolution level!"));
+                userTryAgain = userInputHelper.getBooleanInput("Would you like to try again?");
+                continue;
+            }
+
+            int evolutionLevelDiff = nextEvolutionLevel - currentEvoLevel;
+            String isOrAre = evolutionLevelDiff == 1 ? " is " : " are ";
+
+            return  successMessageColors ("\nFINAL POKÉMON COMPARISON RESULTS:\n" +
+                    "There" + isOrAre + evolutionLevelDiff + " evolution levels until " +
+                    userPokemon.getPokemonName() + " evolves.\n" +
+                    userPokemon.getPokemonName() + " evolves at level: " + userPokemon.getNextEvolutionLevel());
+        }
+        return userInputHelper.errorMessageColors("No evolution check made.");
     }
 
     /* Method Name: print All Pokémon
