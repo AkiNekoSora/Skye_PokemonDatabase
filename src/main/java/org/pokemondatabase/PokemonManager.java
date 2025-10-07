@@ -44,6 +44,13 @@ public class PokemonManager {
         this.pokemonTypes = PokemonTypes.FIRE;
     }
 
+    // Overloaded constructor used by Tests
+    public PokemonManager(UserInputHelper userInputHelper) {
+        this.userInputHelper = userInputHelper;
+        this.pokemonTypes = PokemonTypes.FIRE;
+        this.text = new Text();
+    }
+
     /* Method Name: Add Pokémon Method
      * Purpose: Lets the user add a Pokémon using the CMI. Calls other methods in this class to
      *          obtain all Pokémon information using the CLI.
