@@ -96,8 +96,7 @@ public class Pokemon {
      */
     private String hasPokemonBeenCaught (){
         String pokemonCaughtAnswer;
-        // Checks to see if the PokémonIsCaught variable is true or false. If true it returns
-        // "Caught" if false it returns "Not Caught"
+
         if (pokemonIsCaught) {
             pokemonCaughtAnswer = "Caught";
         } else {
@@ -113,8 +112,6 @@ public class Pokemon {
      * Return Value: String with either the Pokédex Next Evolution level or "NO NEXT EVOLUTION."
      */
     private String hasNextEvolution(){
-        // Checks to see if the Pokédex nextEvolutionLevel variable is null or 0. If null, it
-        // prints "NO NEXT EVOLUTION". If it is not null then it returns the next Evolution Level.
         if (this.nextEvolutionLevel == null || this.nextEvolutionLevel == 0) {
             return "NO NEXT EVOLUTION.";
         } else {
@@ -128,8 +125,6 @@ public class Pokemon {
      * Return Value: String with either the Pokédex Entry or "NO Pokédex ENTRY."
      */
     private String hasPokedexEntry() {
-        // Checks to see if the Pokédex entry is null. If null, it prints "NO Pokédex ENTRY.". If
-        // it is not null then it returns the Pokédex Entry.
         return Objects.requireNonNullElse(this.pokedexEntry, "NO POKÉDEX ENTRY.");
     }
 

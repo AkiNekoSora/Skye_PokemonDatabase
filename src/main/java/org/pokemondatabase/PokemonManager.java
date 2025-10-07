@@ -1,6 +1,5 @@
 package org.pokemondatabase;
 
-import org.pokemondatabase.exceptions.IncorrectVariableAmountException;
 import org.pokemondatabase.exceptions.InvalidPokedexNumberException;
 import org.pokemondatabase.exceptions.InvalidPokemonTypeException;
 
@@ -140,7 +139,6 @@ public class PokemonManager {
         PokemonTypes secondaryType = null;
 
         System.out.print("Enter Pokémon Type(s)\n");
-
         PokemonTypes primaryType = userInputHelper.getValidPokemonType(
                 "    Please enter the Primary Pokémon Type: ");
 
@@ -277,6 +275,7 @@ public class PokemonManager {
                 lineCounter++;
 
                 line = line.trim();
+                // Finds and skips blank lines
                 if (line.isEmpty()) {
                     System.out.println(userInputHelper.errorMessageColors("\n\nSkipping blank " +
                             "line at line " + lineCounter));
@@ -285,6 +284,7 @@ public class PokemonManager {
 
                 String[] variables = line.split("\\|", -1);
 
+                // Cancels input if a line does not meet the required length of variables.
                 if (variables.length < 7 || variables.length > 8) {
                     isFileValid = false;
                     System.out.println(userInputHelper.errorMessageColors(
@@ -307,7 +307,6 @@ public class PokemonManager {
                     break;
                 }
             }
-
         } catch (IOException e) {
             System.out.println(userInputHelper.errorMessageColors("Error reading from file: " + e.getMessage()));
             isFileValid = false;
@@ -358,6 +357,8 @@ public class PokemonManager {
         PokemonTypes primaryType;
         PokemonTypes secondaryType;
         PokemonTypesManager pokemonTypesList = null;
+
+        // Checks if the type is valid. Throwing an exception if there is an error.
         try {
             if (variables[2] == null || variables[2].isEmpty()) {
                 throw new InvalidPokemonTypeException("Pokémon type is empty. Error can be found on line " + lineCounter);
@@ -390,6 +391,7 @@ public class PokemonManager {
 
         // Grab Pokémon Next Evolution
         Integer pokemonNextEvolution = null;
+
         try {
             pokemonNextEvolution = Integer.parseInt(variables[3]);
         } catch (NumberFormatException e) {
@@ -460,6 +462,8 @@ public class PokemonManager {
         System.out.println(text.BLUE + "\nUPDATING POKÉMON INFORMATION!");
         System.out.println("-----------------------------\n" + text.RESET);
 
+        // Loops asking the user for a valid Pokédex number until a Pokemon is found or the user
+        // cancels the search.
         while (userTryAgain) {
             int userEnteredPokedexNum = userInputHelper.getInt(
                     "Enter the Pokédex Number you would like to search for: ",
@@ -477,6 +481,7 @@ public class PokemonManager {
             if (foundPokemon != null) {
                 System.out.println(successMessageColors("Pokémon found: " + foundPokemon.getPokemonName()));
 
+                // Loops until the user cancels the update or gives a valid number
                 while (userContinueToUpdate) {
                     System.out.print(text.GREEN + answers + text.RESET);
 
@@ -485,41 +490,40 @@ public class PokemonManager {
                     System.out.println(); //Used to separate line!
 
                     if (userNumber == 0) {
-
                         return successMessageColors("Pokémon update cancelled!");
                     }
 
                     // Switch used to specify what piece of information the user wants to update.
                     switch (userNumber) {
-                        case 1 -> {
+                        case 1 -> { // UPDATE Pokémon name
                             String newPokemonName = addPokemonName();
                             foundPokemon.setPokemonName(newPokemonName);
                         }
-                        case 2 -> {
+                        case 2 -> { // UPDATE Pokémon Pokédex number
                             int newPokedexNumber = addPokedexNumber(pokemonStorage);
                             foundPokemon.setPokedexNumber(newPokedexNumber);
                         }
-                        case 3 -> {
+                        case 3 -> { // UPDATE Pokémon Type(s)
                             PokemonTypesManager newPokemonTypesList = addPokemonTypes();
                             foundPokemon.setPokemonType(newPokemonTypesList);
                         }
-                        case 4 -> {
+                        case 4 -> { // UPDATE Pokémon next evolution level
                             Integer newEvolutionLevel = addEvolutionLevel();
                             foundPokemon.setNextEvolutionLevel(newEvolutionLevel);
                         }
-                        case 5 -> {
+                        case 5 -> { // UPDATE Pokémon Weight
                             BigDecimal newPokemonWeight = addPokemonWeightorHeight("weight");
                             foundPokemon.setPokemonWeightPounds(newPokemonWeight);
                         }
-                        case 6 -> {
+                        case 6 -> { // UPDATE Pokémon Height
                             BigDecimal newPokemonHeight = addPokemonWeightorHeight("height");
                             foundPokemon.setPokemonHeightMeters(newPokemonHeight);
                         }
-                        case 7 -> {
+                        case 7 -> { // UPDATE Pokémon if the Pokémon has been caught
                             boolean newHasPokemonBeenCaught = hasPokemonBeenCaught();
                             foundPokemon.setPokemonIsCaught(newHasPokemonBeenCaught);
                         }
-                        case 8 -> {
+                        case 8 -> { // UPDATE Pokémon Pokédex entry
                             String newPokedexEntry = addPokedexEntry();
                             foundPokemon.setPokedexEntry(newPokedexEntry);
                         }
@@ -535,7 +539,7 @@ public class PokemonManager {
         return successMessageColors("No Pokémon updated!");
     }
 
-    /* Method Name: Remove Pokémon By Pokédex ID
+    /* Method Name: Remove Pokémon By Pokédex Number
      * Purpose: Allows a user to remove a Pokémon using a Pokédex Number
      * Parameters: The List that holds all Pokémon
      * Return Value: String
@@ -546,6 +550,7 @@ public class PokemonManager {
         System.out.println(text.BLUE + "\nREMOVING AN EXISTING POKÉMON!");
         System.out.println("-----------------------------\n" + text.RESET);
 
+        // Loops until the user gives a valid Pokédex Number
         while (userTryAgain){
             int userStatedPokedexID = userInputHelper.getInt(
                     "Enter the Pokédex ID number you would like to remove: ",
@@ -579,6 +584,7 @@ public class PokemonManager {
         System.out.println(text.BLUE + "\nSEARCHING FOR AN EXISTING POKÉMON!");
         System.out.println("---------------------------------\n" + text.RESET);
 
+        // Loops until the user gives a valid Pokédex Number
         while (userTryAgain) {
             int userStatedPokedexNum = userInputHelper.getInt(
                     "Enter the Pokédex ID you would like to find: ",
@@ -610,6 +616,7 @@ public class PokemonManager {
         System.out.println(text.BLUE + "\nCOMPARING WEIGHT AND HEIGHT OF TWO POKÉMON!");
         System.out.println("-------------------------------------------\n" + text.RESET);
 
+        // Loops until the user gives two valid Pokédex Numbers
         while (userTryAgain) {
             int PokedexNumber1 = userInputHelper.getInt(
                     "Enter the first Pokédex ID you would like to compare: ",
@@ -680,6 +687,7 @@ public class PokemonManager {
         System.out.println(text.BLUE + "\nCHECKING HOW MANY LEVELS UNTIL A POKÉMON EVOLUTION!");
         System.out.println("---------------------------------------------------\n" + text.RESET);
 
+        // Loops until the user gives a valid Pokédex Number
         while (userTryAgain) {
                 int userPokedexNumber = userInputHelper.getInt(
                         "Enter the Pokédex ID you would like to check next Evolution: ",
@@ -703,10 +711,8 @@ public class PokemonManager {
                         }
                     }
                 }
-
                 userTryAgain = userInputHelper.getBooleanInput("Would you like to try again?");
             }
-
         return "No evolution check made.";
     }
 

@@ -1,7 +1,7 @@
 /*
  * Autumn Skye
  * CEN-3024C 13950
- * September 3rd, 2025
+ * October 5th, 2025
  *
  * Exception class used when a user enters an invalid Pokédex Number.
  */

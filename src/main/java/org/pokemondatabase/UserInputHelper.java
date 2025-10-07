@@ -35,7 +35,7 @@ public class UserInputHelper {
      * Return Value: Int
      */
     public int getInt(String prompt, String errorMessage) {
-        // Loops until valid input
+        // Loops until valid int is given
         while (true) {
             try {
                 System.out.print(prompt);
@@ -59,7 +59,7 @@ public class UserInputHelper {
         String errorMessage = text.BRIGHT_RED +
                 "Input must be between " + min + " and " + max + "." + text.RESET;
 
-        // Loops until valid input
+        // Loops until valid int in range is given
         while (true) {
             int value = getInt(prompt, errorMessage);
             if (value >= min && value <= max) {
@@ -76,7 +76,7 @@ public class UserInputHelper {
      * Return Value: Int
      */
     public int getIntInRange(String prompt, int min, int max, String errorMessage) {
-        // Loops until valid input
+        // Loops until valid int in range is given
         while (true) {
             int value = getInt(prompt, "Input must be a number. Please try again.");
             if (value >= min && value <= max) {
@@ -92,7 +92,7 @@ public class UserInputHelper {
      * Return Value: BigDecimal
      */
     public BigDecimal getBigDecimal(String prompt, String errorMessage) {
-        // Loops until valid input
+        // Loops until valid BigDecimal is given
         while (true) {
             try {
                 System.out.print(prompt);
@@ -112,7 +112,7 @@ public class UserInputHelper {
      * Return Value: Boolean
      */
     public boolean getBooleanInput(String question) {
-        // Loops until valid input
+        // Loops until valid "y/yes" or "n/no" is given
         while (true) {
             System.out.print(question + " (y or n): ");
             String input = scnr.nextLine().trim().toLowerCase();
@@ -143,7 +143,7 @@ public class UserInputHelper {
      * Return Value: String
      */
     public String getValidPokemonName(String prompt) {
-        // Loops until valid input
+        // Loops until valid String is given
         while (true) {
             String input = getString(prompt);
 
@@ -162,7 +162,7 @@ public class UserInputHelper {
      * Return Value: PokémonTypes
      */
     public PokemonTypes getValidPokemonType(String prompt) {
-        // Loops until valid input
+        // Loops until valid Pokémon Type is given
         while (true) {
             String input = getString(prompt);
 

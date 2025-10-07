@@ -1,6 +1,5 @@
 package org.pokemondatabase;
 
-import org.pokemondatabase.exceptions.InvalidPokedexNumberException;
 import org.pokemondatabase.exceptions.InvalidPokemonTypeException;
 
 /*

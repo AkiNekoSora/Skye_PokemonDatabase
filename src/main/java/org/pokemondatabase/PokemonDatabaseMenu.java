@@ -33,9 +33,8 @@ public class PokemonDatabaseMenu {
         System.out.println("| WELCOME TO THE POKÉMON DATABASE! |");
         System.out.println("------------------------------------\n" + text.RESET);
 
-        /* A while loop used to accept the user input to decide what they would like to
-         * do until they choose the "0" option to exit the system.
-         */
+        // A while loop used to accept the user input to decide what they would like to
+        // do until they choose the "0" option to exit the system.
         while (userChoice != 0) {
             System.out.println(printPokemonDatabaseOptions());
 

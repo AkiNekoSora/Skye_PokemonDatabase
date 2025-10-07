@@ -1,5 +1,4 @@
 import org.junit.Test;
-import org.junit.jupiter.api.DisplayName;
 import org.pokemondatabase.exceptions.IncorrectVariableAmountException;
 import org.pokemondatabase.exceptions.InvalidPokedexNumberException;
 import org.pokemondatabase.exceptions.InvalidPokemonTypeException;
