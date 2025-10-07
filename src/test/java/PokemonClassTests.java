@@ -1,16 +1,23 @@
+import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.pokemondatabase.Pokemon;
 import org.pokemondatabase.PokemonTypes;
 import org.pokemondatabase.PokemonTypesManager;
-
-import java.math.BigDecimal;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/*
+ * Autumn Skye
+ * CEN-3024C 13950
+ * October 7th, 2025
+ *
+ * Class Name: Pokémon Class Tests
+ * Purpose: Used to test that the Pokémon class methods work as needed. And that a Pokémon can
+ *          successfully be added using the class.
+ */
 class PokemonClassTests {
-
+    // Variables used in the tests
     private Pokemon charmander;
     private String expectedPokemonName;
     private int expectedPokedexNumber;
@@ -21,8 +28,13 @@ class PokemonClassTests {
     private Boolean expectedIsCaught;
     private String expectedPokedexEntry;
 
+    /* Method Name: set up
+     * Purpose: Used before each class to create a new Pokemon
+     * Parameters: None
+     * Return Value: Void
+     */
     @BeforeEach
-    public void setUp() throws Exception {
+    public void setUp() {
         expectedPokemonName = "Charmander";
         expectedPokedexNumber = 4;
         expectedPokemonType = new PokemonTypesManager(PokemonTypes.FIRE);
@@ -33,19 +45,18 @@ class PokemonClassTests {
         expectedPokedexEntry = "The flame on its tail shows the strength of its " +
                 "life-force. If Charmander is weak, the flame also burns weakly.";
 
-        //Act
-        charmander = new Pokemon(
-                expectedPokemonName,
-                expectedPokedexNumber,
-                expectedPokemonType,
-                expectedNextEvolutionLevel,
-                expectedWeight,
-                expectedHeight,
-                expectedIsCaught,
-                expectedPokedexEntry
+        charmander = new Pokemon(expectedPokemonName, expectedPokedexNumber, expectedPokemonType,
+                expectedNextEvolutionLevel, expectedWeight, expectedHeight,
+                expectedIsCaught, expectedPokedexEntry
         );
     }
 
+    /* Method Name: Pokémon constructor test
+     * Purpose: Tests to verify all Pokémon variables have been assigned correctly and the
+     *          getters work as required.
+     * Parameters: None
+     * Return Value: Void
+     */
     @Test
     @DisplayName("Are Fields assigned correctly? And do the getters work?")
     void pokemonConstructorTest() {
@@ -60,9 +71,15 @@ class PokemonClassTests {
         assertEquals(expectedPokedexEntry, charmander.getPokedexEntry());
     }
 
+    /* Method Name: Pokémon setters test
+     * Purpose: Verify the setter methods work as required
+     * Parameters: None
+     * Return Value: Void
+     */
     @Test
     @DisplayName("Does Pokémon Class hold a Pokémon?")
     void pokemonSettersTest() {
+        // Variables used to test the set methods
         String updatedExpectedPokemonName = "Charmeleon";
         int updatedexpectedPokedexNumber = 6;
         PokemonTypesManager updatedexpectedPokemonType = new PokemonTypesManager(PokemonTypes.FIRE);
@@ -92,6 +109,11 @@ class PokemonClassTests {
                 charmander.setPokedexEntry(updatedexpectedPokedexEntry));
     }
 
+    /* Method Name: Pokémon toString test
+     * Purpose: Tests to verify the toString method prints as required.
+     * Parameters: None
+     * Return Value: Void
+     */
     @Test
     @DisplayName("Does Pokémon Class toString Method Work?")
     void pokemontoStringTest() {
