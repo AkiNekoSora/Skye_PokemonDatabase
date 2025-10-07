@@ -3,11 +3,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.pokemondatabase.PokemonTypes;
 import org.pokemondatabase.PokemonTypesManager;
-import org.pokemondatabase.exceptions.NoDuplicateTypesException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TypesClassTests {
+class TypesManagerClassTests {
+    private final PokemonTypesManager pokemonTypesManager = new PokemonTypesManager(PokemonTypes.FIRE);
+
     private PokemonTypes expectedPrimaryType;
     private PokemonTypes expectedSecondaryType;
 
@@ -46,19 +47,24 @@ class TypesClassTests {
 
     @Test
     @DisplayName("Does the NoDuplicateTypesException throw correctly?")
-    void testNoDuplicateTypesThrowsException() {
-        assertThrows(NoDuplicateTypesException.class,
-                () -> testingTypesWithOneType.setPokemonSecondaryType(expectedPrimaryType));
+    void testNoDuplicateTypesReturnsFalse() {
+        assertEquals(false, pokemonTypesManager.verifyNoDuplicatePokemonTypes(expectedSecondaryType
+                , expectedSecondaryType));
     }
 
     @Test
     @DisplayName("Does the NoDuplicateTypesException not get thrown when type is not duplicated?")
-    void testNoDuplicateTypesDoesNotThrowException() {
-        assertDoesNotThrow(() -> testingTypesWithOneType.setPokemonSecondaryType(expectedSecondaryType));
+    void testNoDuplicateTypesReturnsTrue() {
+        assertEquals(true, pokemonTypesManager.verifyNoDuplicatePokemonTypes(expectedPrimaryType
+                , expectedSecondaryType));
     }
 
-
-
+    @Test
+    @DisplayName("Testing getAllPokemonTypes method with One or Two Types")
+    void testGetAllPokemonTypes() {
+        assertEquals("Fire", testingTypesWithOneType.getAllPokemonTypes());
+        assertEquals("Fire & Flying", testingTypesWithTwoTypes.getAllPokemonTypes());
+    }
 
 
 

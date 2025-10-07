@@ -49,7 +49,7 @@ public class Pokemon {
     public int getPokedexNumber() {return pokedexNumber;}
     public PokemonTypesManager getPokemonType() {return pokemonTypes;}
     public Integer getNextEvolutionLevel() {return nextEvolutionLevel;}
-    public BigDecimal getPokemonWeightPounds() {return pokemonWeightKg;}
+    public BigDecimal getPokemonWeightKilograms() {return pokemonWeightKg;}
     public BigDecimal getPokemonHeightMeters() {return pokemonHeightMeters;}
     public Boolean getPokemonIsCaught() {return pokemonIsCaught;}
     public String getPokedexEntry() {return pokedexEntry;}

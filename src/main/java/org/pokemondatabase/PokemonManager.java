@@ -33,7 +33,7 @@ import java.util.*;
  */
 
 public class PokemonManager {
-    private final UserInputHelper userInputHelper;
+    public UserInputHelper userInputHelper;
     private final Text text;
     private final PokemonTypes pokemonTypes;
 
@@ -622,7 +622,7 @@ public class PokemonManager {
             if (pokemon1 == null || pokemon2 == null) {
                 System.out.println(text.BRIGHT_RED + "One or both Pokédex numbers were not found.\n" + text.RESET);
             } else {
-                BigDecimal weightDiff = pokemon1.getPokemonWeightPounds().subtract(pokemon2.getPokemonWeightPounds());
+                BigDecimal weightDiff = pokemon1.getPokemonWeightKilograms().subtract(pokemon2.getPokemonWeightKilograms());
                 BigDecimal heightDiff = pokemon1.getPokemonHeightMeters().subtract(pokemon2.getPokemonHeightMeters());
 
                 StringBuilder pokemonComparisonResults = new StringBuilder();

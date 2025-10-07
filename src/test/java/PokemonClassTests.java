@@ -54,14 +54,14 @@ class PokemonClassTests {
         assertEquals(expectedPokedexNumber, charmander.getPokedexNumber());
         assertEquals(expectedPokemonType, charmander.getPokemonType());
         assertEquals(expectedNextEvolutionLevel, charmander.getNextEvolutionLevel());
-        assertEquals(expectedWeight, charmander.getPokemonWeightPounds());
+        assertEquals(expectedWeight, charmander.getPokemonWeightKilograms());
         assertEquals(expectedHeight, charmander.getPokemonHeightMeters());
         assertEquals(expectedIsCaught, charmander.getPokemonIsCaught());
         assertEquals(expectedPokedexEntry, charmander.getPokedexEntry());
     }
 
     @Test
-    @DisplayName("Does Pokemon Class hold a Pokemon?")
+    @DisplayName("Does Pokémon Class hold a Pokémon?")
     void pokemonSettersTest() {
         String updatedExpectedPokemonName = "Charmeleon";
         int updatedexpectedPokedexNumber = 6;
@@ -73,39 +73,38 @@ class PokemonClassTests {
         String updatedexpectedPokedexEntry = "If Charizard becomes truly angered, the flame " +
                 "at the tip of its tail burns in a light blue shade.";
 
-        //Assert
-        assertEquals("Pokemon Name updated to: " + updatedExpectedPokemonName,
+        assertEquals("Pokémon Name updated to: " + updatedExpectedPokemonName,
                 charmander.setPokemonName(updatedExpectedPokemonName));
-        assertEquals("Pokedex Number has been updated to: " + updatedexpectedPokedexNumber,
+        assertEquals("Pokédex Number has been updated to: " + updatedexpectedPokedexNumber,
                 charmander.setPokedexNumber(updatedexpectedPokedexNumber));
-        assertEquals("Pokemon Type has been updated to: " + updatedexpectedPokemonType,
+        assertEquals("Pokémon Type has been updated to: " + updatedexpectedPokemonType,
                 charmander.setPokemonType(updatedexpectedPokemonType));
-        assertEquals("Pokemon Next Evolution as been updated to: " + updatedexpectedNextEvolutionLevel,
+        assertEquals("Pokémon Next Evolution as been updated to: " + updatedexpectedNextEvolutionLevel,
                 charmander.setNextEvolutionLevel(updatedexpectedNextEvolutionLevel));
-        assertEquals("Pokemon Weight has been updated to: " + updatedexpectedWeight,
+        assertEquals("Pokémon Weight has been updated to: " + updatedexpectedWeight,
                 charmander.setPokemonWeightPounds(updatedexpectedWeight));
-        assertEquals("Pokemon Height has been updated to: " + updatedexpectedHeight,
+        assertEquals("Pokémon Height has been updated to: " + updatedexpectedHeight,
                 charmander.setPokemonHeightMeters(updatedexpectedHeight));
         //Had to manually enter the correct answer since it said "true" instead of "Caught".
-        assertEquals("'Has Pokemon been caught?' has been updated to: Caught",
+        assertEquals("'Has Pokémon been caught?' has been updated to: Caught",
                 charmander.setPokemonIsCaught(updatedexpectedIsCaught));
-        assertEquals("Pokemon Name updated to: \"" + updatedexpectedPokedexEntry + "\"",
+        assertEquals("Pokémon Name updated to: \"" + updatedexpectedPokedexEntry + "\"",
                 charmander.setPokedexEntry(updatedexpectedPokedexEntry));
     }
 
     @Test
-    @DisplayName("Does Pokemon Class toString Method Work?")
+    @DisplayName("Does Pokémon Class toString Method Work?")
     void pokemontoStringTest() {
         String expectedtoString =
                 "\n" +
-                "    Pokemon Name: Charmander" + "\n" +
-                "    Pokedex Number: 4" + "\n" +
-                "    Pokedex Type: Fire" + "\n" +
+                "    Pokémon Name: Charmander" + "\n" +
+                "    Pokédex Number: 4" + "\n" +
+                "    Pokédex Type: Fire" + "\n" +
                 "    Next Evolution Level: 16" + "\n" +
-                "    Pokemon Weight in Pounds: 18.7" + "\n" +
-                "    Pokemon Height in Meters: 0.6" + "\n" +
-                "    Have you Caught this Pokemon?: Not Caught" + "\n" +
-                "    Pokedex Entry: The flame on its tail shows the strength of its life-force. " +
+                "    Pokémon Weight in Pounds: 18.7" + "\n" +
+                "    Pokémon Height in Meters: 0.6" + "\n" +
+                "    Have you Caught this Pokémon?: Not Caught" + "\n" +
+                "    Pokédex Entry: The flame on its tail shows the strength of its life-force. " +
                         "If Charmander is weak, the flame also burns weakly.\n";
 
         assertEquals(expectedtoString, charmander.toString());
