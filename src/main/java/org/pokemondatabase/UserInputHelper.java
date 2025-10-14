@@ -83,6 +83,7 @@ public class UserInputHelper {
                 return value;
             }
             System.out.println(errorMessageColors(errorMessage));
+
         }
     }
 
@@ -151,6 +152,13 @@ public class UserInputHelper {
                 return input;
             } else {
                 System.out.println(errorMessageColors("Invalid Pokémon name. Numbers or spaces are not allowed. Please try again."));
+
+                boolean cancelAddPokemon = getBooleanInput("Would you like to cancel current " +
+                        "process?");
+
+                if (cancelAddPokemon) {
+                    return null;
+                }
             }
         }
     }

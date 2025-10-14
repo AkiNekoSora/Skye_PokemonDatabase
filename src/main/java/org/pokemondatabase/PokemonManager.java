@@ -62,6 +62,10 @@ public class PokemonManager {
 
         // Obtaining all Pokémon information using methods in this class.
         String pokemonName = addPokemonName();
+        if (pokemonName == null) {
+            return userInputHelper.errorMessageColors("Pokémon creation cancelled.");
+        }
+
         int pokedexNumber = addPokedexNumber(pokemonStorage);
         PokemonTypesManager pokemonTypes = addPokemonTypes();
         int nextEvolutionLevel = addEvolutionLevel();
@@ -74,9 +78,23 @@ public class PokemonManager {
                 nextEvolutionLevel, pokemonWeightPounds, pokemonHeightMeters, hasPokemonBeenCaught,
                 pokedexEntry);
 
-        pokemonStorage.add(newPokemon);
+        System.out.println("Please verify all information of the Pokémon: " + newPokemon);
+        boolean verificationResults = userInputHelper.getBooleanInput("Would you like to add " +
+                "this Pokémon to your database?");
 
-        return successMessageColors("Pokémon Added!");
+        if (verificationResults) {
+            int beforeSize = pokemonStorage.size();
+            pokemonStorage.add(newPokemon);
+            int afterSize = pokemonStorage.size();
+
+            if (afterSize == beforeSize + 1) {
+                return successMessageColors("Pokémon Added!");
+            } else {
+                return userInputHelper.errorMessageColors("Pokémon was not added to the database.");
+            }
+        } else {
+            return userInputHelper.errorMessageColors("Pokémon was not added to the database.");
+        }
     }
 
     /* Method Name: Add Pokémon Name

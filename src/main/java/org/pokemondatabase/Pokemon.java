@@ -34,7 +34,7 @@ public class Pokemon {
     public Pokemon(String pokemonName, int PokedexNumber, PokemonTypesManager pokemonTypes,
                    int nextEvolutionLevel, BigDecimal pokemonWeightPounds, BigDecimal pokemonHeightMeters,
                    Boolean pokemonIsCaught, String pokedexEntry) {
-        this.pokemonName = pokemonName.substring(0, 1).toUpperCase() + pokemonName.substring(1);;
+        this.pokemonName = formatPokemonName(pokemonName);
         this.pokedexNumber = PokedexNumber;
         this.pokemonTypes = pokemonTypes;
         this.nextEvolutionLevel = nextEvolutionLevel;
@@ -42,6 +42,13 @@ public class Pokemon {
         this.pokemonHeightMeters = pokemonHeightMeters;
         this.pokemonIsCaught = pokemonIsCaught;
         this.pokedexEntry = pokedexEntry;
+    }
+
+    public String formatPokemonName(String pokemonName) {
+        if (pokemonName == null || pokemonName.isEmpty()) {
+            return "";
+        }
+        return pokemonName.substring(0, 1).toUpperCase() + pokemonName.substring(1);
     }
 
     // Getters!
